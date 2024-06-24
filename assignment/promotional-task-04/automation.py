@@ -1,8 +1,14 @@
 import os
 import subprocess
 
+# Company's Base Directory
 base_directory = "/vagrant"
+
+# Company's Directory
 company_directory = "Kodecamp-Stores"
+
+# Name of Company CEO
+ceo_name = "Bach"
 
 # Employees
 employees = {
@@ -23,8 +29,8 @@ company_directories = {
     "Business-Projections": "Business-Strategist",
     "Business-Models": "Sales-Manager",
     "Employee-Data": "HR",
-    "Company-Vision and Mission Statement": "CEO",
-    "Server-Configuration Script": "System-Administrator"
+    "Company-Vision-and-Mission-Statement": "CEO",
+    "Server-Configuration-Script": "System-Administrator"
 }
 
 # create_user_and_group_command = ["sudo", "useradd", "-m", "-G", "group", "employee_name"]  # legal Julius
@@ -89,6 +95,8 @@ def create_directory(directory_name):
         print(f"Directory /{company_directory}/{directory_name} created")
 
 # Create Directories
+
+
 def create_directories(directory_name):
     try:
         os.makedirs(f"/{company_directory}/{directory_name}", exist_ok=True)
@@ -98,16 +106,46 @@ def create_directories(directory_name):
             f"Error creating directory /{company_directory}/{directory_name}: {e}")
 
 # Set Permissions Functions
+
+
 def set_permissions(directory_name, employee_name, group):
     try:
         subprocess.run(["sudo", "chown", f"{employee_name}:{group}",
                        f"/{company_directory}/{directory_name}"], check=True)
-        subprocess.run(
-            ["sudo", "chmod", "770", f"/{company_directory}/{directory_name}"], check=True)
+        if group == "CEO" and employee_name == ceo_name:
+            set_ceo_permission(directory_name)
+        else:
+            subprocess.run(
+                ["sudo", "chmod", "770", f"/{company_directory}/{directory_name}"], check=True)
         print(f"Permissions set for /{company_directory}/{directory_name}")
     except subprocess.CalledProcessError as e:
         print(
             f"Error setting permissions for /{company_directory}/{directory_name}: {e}")
+
+# Set specific permissions for CEO
+
+
+def set_ceo_permission(directory_name):
+    try:
+        subprocess.run(
+            ["sudo", "chmod", "774", f"/{company_directory}/{directory_name}"], check=True)
+        print(f"Permissions set for /{company_directory}/{directory_name}")
+    except subprocess.CalledProcessError as e:
+        print(
+            f"Error setting permissions for /{company_directory}/{directory_name}: {e}")
+
+# Add CEO to other groups
+
+
+def other_groups_add_ceo():
+    for group in company_directories.values():
+        if group != "System-Administrator":
+            try:
+                subprocess.run(["sudo", "usermod", "-aG", group, ceo_name])
+                print(f"Added CEO {ceo_name} to group {group}")
+            except subprocess.CalledProcessError as e:
+                print(f"Error adding CEO {ceo_name} to group {group}")
+
 
 # Create Files in a specified directory
 def create_file():
@@ -128,6 +166,8 @@ def create_file():
             f"Directory /{company_directory}/{directory_name} does not exist. File not created.")
 
 # Main Function
+
+
 def main():
     # Create users/Employees and directories
     for employee_name, group in employees.items():
@@ -145,8 +185,12 @@ def main():
         if employee:
             set_permissions(directory_name, employee[0], group)
 
+    # Call to add ceo to other groups
+    other_groups_add_ceo()
+
     # Call to create file
     create_file()
+
 
 # Call to main function
 main()
