@@ -1,4 +1,8 @@
-# SETTING UP A VPC WITH PRIVATE AND PUBLIC SUBNETS, SECURITY GROUPS AND NETWORK ACCESS CONTROL LISTS(NACLs) ON AWS
+# SETTING UP A VPC WITH PRIVATE AND PUBLIC SUBNETS, SECURITY GROUPS, INTERNET AND NAT GATEWAY, AND NETWORK ACCESS CONTROL LISTS(NACLs) ON AWS
+## INTRODUCTION
+Many businesses are adopting cloud technology because it eliminates the need for physical infrastructure and enables easy and quick setups and operations therefore, creating a robust and secure networking infrastructure in the cloud is a fundamental aspect of deploying applications and services. Amazon Web Services (AWS) offers a comprehensive suite of tools to help you set up a Virtual Private Cloud (VPC), allowing you to launch AWS resources in a logically isolated virtual network that you define.
+
+In this write up, we will go through the process of setting up a VPC with both private and public subnets, configuring security groups, and establishing internet connectivity via an Internet Gateway (IGW) and a NAT Gateway. Additionally, we will cover the implementation of Network Access Control Lists (NACLs) to further enhance your network security.
 
 ## STEP 1 - CREATE VPC
 To create a VPC, open the AWS console and select the region of choice(eg. eu-west-1) at the top right. Click on Services, and select Networking & Content Delivery. From the menu that appears, choose VPC, you can still search in the search bar for easy access. On the next page, click the Create VPC button and enter the following details:
@@ -223,3 +227,41 @@ Firewall(security groups): KcDBServer (Private SG)
 Now launch and verify that the instance can access the internet through the NAT Gateway and can communicate with the public instance
 ![aws-private-instance-created](https://github.com/user-attachments/assets/15c4542f-c74c-4d13-912c-5578eb8fbc35)
 
+## ARCHITECTURAL DIAGRAM
+
+
+## BRIEF EXPLANATION OF VPC, SUBNETS, INTERNET GATEWAY, NAT GATEWAY, ROUTE TABLES, SECURITY GROUPS, NACLs
+### Virtual Private Cloud - VPC
+Unlike traditional networks, a VPC is a virtual network in the cloud that is secure and privately isolated. It provides complete control over the virtual networking environment, including IP address ranges, subnets, route tables, and network gateways.
+
+We created a VPC to launch our resources and services on AWS. 
+
+### Subnets
+Subnets are logical partitions of an Internet Protocol (IP) network range broken into multiple,smaller, and more manageable segments. It facilitates the organization and isolation of resources within a VPC and can be designated as public (accessible from the internet) or private (not directly accessible from the internet).
+
+We created a public subnets to house our public resources and services and a private subnet to for our private resources and services. 
+
+### Internet Gateway - IGW
+An internet gateway allows communication between instances in a VPC and the internet. It provides a target in route tables for internet-routable traffic, enabling outbound communication to the internet and inbound communication from the internet.
+
+We created an internet gateway to allow our instances to access the internet.
+
+### NAT Gateway
+A Network Address Translation (NAT) Gateway enables instances in a private subnet to connect to the internet or other services, but prevents the internet from initiating connections with those instances. It provides a target in route tables for internet-bound traffic originating from private subnets, translating private IP addresses to the NAT Gateway's public IP address.
+
+We created a NAT gateway to allow our private instances access the internet.
+
+### Route Tables
+A route table contains a set of rules that determines where network traffics from subnets or gateways are directed, thus it controls the routing of traffic within a VPC. Each subnet must be associated with a route table, which dictates how traffic is routed.
+
+Our route tables helped us to direct network traffics to desired destinations.
+
+### Security Groups
+A security group acts as virtual firewalls for instances to control inbound and outbound traffic. It defines rules that specify the allowed traffic to and from instances. Security groups are stateful, meaning if an inbound connection is allowed, the return traffic is automatically allowed.
+
+Our security group rules helped us secure the access to and from our instances.
+
+### Network Access Control Lists - NACLs
+An NACL Provides an additional layer of security at the subnet level. It controls inbound and outbound traffic to and from subnets. NACLs are stateless, meaning each rule is evaluated independently, and both inbound and outbound rules need to be explicitly defined.
+
+The NACLs provided an extra security to and from our subnets by allowing specific or desired traffics.
