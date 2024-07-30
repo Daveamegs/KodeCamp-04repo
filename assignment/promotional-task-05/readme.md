@@ -228,7 +228,7 @@ Now launch and verify that the instance can access the internet through the NAT 
 ![aws-private-instance-created](https://github.com/user-attachments/assets/15c4542f-c74c-4d13-912c-5578eb8fbc35)
 
 ## ARCHITECTURAL DIAGRAM
-
+![aws-kc-architecture-diagram](https://github.com/user-attachments/assets/650dfe69-5fc0-4e09-ae4e-25b50e3bc406)
 
 ## BRIEF EXPLANATION OF VPC, SUBNETS, INTERNET GATEWAY, NAT GATEWAY, ROUTE TABLES, SECURITY GROUPS, NACLs
 ### Virtual Private Cloud - VPC
