@@ -8,7 +8,7 @@ resource "aws_network_acl" "public" {
     protocol   = "-1"
     rule_no    = 100
     action     = "allow"
-    cidr_block = var.internet_cidr_block
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
@@ -17,7 +17,7 @@ resource "aws_network_acl" "public" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = var.internet_cidr_block
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
@@ -26,7 +26,7 @@ resource "aws_network_acl" "public" {
     protocol   = "tcp"
     rule_no    = 110
     action     = "allow"
-    cidr_block = var.internet_cidr_block
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
@@ -50,16 +50,16 @@ resource "aws_network_acl" "private" {
   egress {
     from_port  = 80
     to_port    = 80
-    protocol   = "-1"
+    protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = var.internet_cidr_block
+    cidr_block = "0.0.0.0/0"
   }
 
   egress {
     from_port  = 0
     to_port    = 0
-    protocol   = "tcp"
+    protocol   = "-1"
     rule_no    = 110
     action     = "allow"
     cidr_block = "10.0.1.0/24"

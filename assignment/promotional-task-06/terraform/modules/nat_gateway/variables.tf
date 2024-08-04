@@ -3,13 +3,13 @@ variable "public_subnet_id" {
   type        = string
 }
 
-variable "vpc_id" {
-  description = "VPC ID"
+variable "private_route_table_id" {
+  description = "Private route table ID"
   type        = string
 }
 
 variable "nat_gateway_name" {
   description = "Name of NAT Gateway"
-  type = string
-  default = "KC-NAT-Gateway"
+  type        = string
+  default     = "KC-NAT-Gateway"
 }

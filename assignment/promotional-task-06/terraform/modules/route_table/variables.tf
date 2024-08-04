@@ -9,12 +9,12 @@ variable "internet_cidr_block" {
   default     = "0.0.0.0/0"
 }
 
-variable "igw_id" {
+variable "internet_gateway_id" {
   description = "Internet Gateway ID"
   type        = string
 }
 
-variable "natgw_id" {
+variable "nat_gateway_id" {
   description = "NAT Gateway ID"
   type        = string
 }

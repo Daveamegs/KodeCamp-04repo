@@ -11,11 +11,11 @@ output "private_subnet_id" {
 }
 
 output "public_route_table_id" {
-  value = module.route_tables.public_route_table_id
+  value = module.route_table.public_route_table_id
 }
 
 output "private_route_table_id" {
-  value = module.route_tables.private_route_table_id
+  value = module.route_table.private_route_table_id
 }
 
 output "public_instance_id" {

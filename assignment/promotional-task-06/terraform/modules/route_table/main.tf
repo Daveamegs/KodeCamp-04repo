@@ -3,7 +3,7 @@ resource "aws_route_table" "public" {
 
   route {
     cidr_block = var.internet_cidr_block
-    gateway_id = var.igw_id
+    gateway_id = var.internet_gateway_id
   }
 
   tags = {
@@ -21,7 +21,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block     = var.internet_cidr_block
-    nat_gateway_id = var.natgw_id
+    nat_gateway_id = var.nat_gateway_id
   }
 
   tags = {

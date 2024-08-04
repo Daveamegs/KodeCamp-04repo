@@ -29,9 +29,9 @@ module "internet_gateway" {
 }
 
 module "nat_gateway" {
-  source           = "./modules/nat_gateway"
-  vpc_id           = module.vpc.vpc_id
-  public_subnet_id = module.subnet.public_subnet_id
+  source                 = "./modules/nat_gateway"
+  public_subnet_id       = module.subnet.public_subnet_id
+  private_route_table_id = module.route_table.private_route_table_id
 }
 
 module "route_table" {
@@ -53,7 +53,6 @@ module "security_groups" {
 module "nacls" {
   source            = "./modules/nacls"
   vpc_id            = module.vpc.vpc_id
-  vpc_cidr_block    = module.vpc.vpc_cidr_block
   public_subnet_id  = module.subnet.public_subnet_id
   private_subnet_id = module.subnet.private_subnet_id
   ssh_access_ip     = var.ssh_access_ip
