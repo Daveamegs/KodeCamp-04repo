@@ -39,3 +39,8 @@ variable "private_instance_name" {
   type = string
   default = "KCDBServer"
 }
+
+variable "key_name" {
+  description = "Key pair name"
+  type = string
+}

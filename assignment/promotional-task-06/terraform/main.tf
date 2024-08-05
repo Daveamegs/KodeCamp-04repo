@@ -66,4 +66,5 @@ module "instances" {
   private_subnet_id = module.subnet.private_subnet_id
   public_sg_id      = module.security_groups.public_sg_id
   private_sg_id     = module.security_groups.private_sg_id
+  key_name          = var.key_name
 }

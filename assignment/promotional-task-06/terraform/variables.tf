@@ -13,6 +13,11 @@ variable "instance_type" {
 variable "ssh_access_ip" {
   description = "IP address to allow SSH access from"
   type        = string
-  default     = "154.160.0.0/24"
+  default     = "154.161.131.148/32"
 }
 
+variable "key_name" {
+  description = "Key pair name"
+  type        = string
+  default     = "webserver-pem-key-pair"
+}
