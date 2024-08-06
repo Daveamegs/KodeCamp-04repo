@@ -1088,6 +1088,8 @@ Firstly, we will initialize Terraform. In your `terraform` directory, from the t
 ```bash
 terraform init
 ```
+![tf-init-2](https://github.com/user-attachments/assets/9aeb8846-8813-40da-a022-304ede266ea7)
+
 Then run
 ```bash
 terraform plan -out tfplan.json
