@@ -1099,7 +1099,70 @@ After that, run
 ```bash
 terraform apply
 ```
-This will create all the resources you stated with code.
+This will create all the resources you stated with code. See the output below.
+```bash
+david@ommema:~/Documents/DevOps/kodecamp/kodecamp4/github-clone/KodeCamp-04repo/assignment/promotional-task-06/terraform$ terraform apply "tfplan.json"
+module.nat_gateway.aws_eip.nat: Creating...
+module.vpc.aws_vpc.vpc: Creating...
+module.nat_gateway.aws_eip.nat: Creation complete after 2s [id=eipalloc-08655cdc24deb6db3]
+module.vpc.aws_vpc.vpc: Creation complete after 3s [id=vpc-0f7a67bf89ac8e585]
+module.internet_gateway.aws_internet_gateway.main: Creating...
+module.subnet.aws_subnet.public: Creating...
+module.subnet.aws_subnet.private: Creating...
+module.security_groups.aws_security_group.public: Creating...
+module.subnet.aws_subnet.public: Creation complete after 1s [id=subnet-0c967b1478c8df800]
+module.nat_gateway.aws_nat_gateway.main: Creating...
+module.nacls.aws_network_acl.public: Creating...
+module.subnet.aws_subnet.private: Creation complete after 1s [id=subnet-04a19fea1bea0ad03]
+module.internet_gateway.aws_internet_gateway.main: Creation complete after 1s [id=igw-0f3bc332f1fbf4d0a]
+module.route_table.aws_route_table.public: Creating...
+module.nacls.aws_network_acl.private: Creating...
+module.nacls.aws_network_acl.private: Creation complete after 2s [id=acl-09402e01f1f17c5f6]
+module.route_table.aws_route_table.public: Creation complete after 2s [id=rtb-09430c59706d2b38e]
+module.route_table.aws_route_table_association.public: Creating...
+module.nacls.aws_network_acl.public: Creation complete after 2s [id=acl-0154faca27bcf4bb9]
+module.route_table.aws_route_table_association.public: Creation complete after 1s [id=rtbassoc-0db080fe74d3af6f0]
+module.security_groups.aws_security_group.public: Creation complete after 4s [id=sg-09d69fbc2e92dffda]
+module.security_groups.aws_security_group.private: Creating...
+module.instances.aws_instance.public_instance: Creating...
+module.security_groups.aws_security_group.private: Creation complete after 4s [id=sg-02bcdb45367b3d171]
+module.instances.aws_instance.private_instance: Creating...
+module.nat_gateway.aws_nat_gateway.main: Still creating... [10s elapsed]
+module.instances.aws_instance.public_instance: Still creating... [10s elapsed]
+module.instances.aws_instance.private_instance: Still creating... [10s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [20s elapsed]
+module.instances.aws_instance.public_instance: Still creating... [20s elapsed]
+module.instances.aws_instance.public_instance: Creation complete after 24s [id=i-0b76496c749e86e35]
+module.instances.aws_instance.private_instance: Still creating... [20s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [30s elapsed]
+module.instances.aws_instance.private_instance: Still creating... [30s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [40s elapsed]
+module.instances.aws_instance.private_instance: Creation complete after 34s [id=i-026e35d4de804ecae]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [50s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [1m0s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [1m10s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [1m20s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still creating... [1m30s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Creation complete after 1m36s [id=nat-0d279a6643a6dab62]
+module.route_table.aws_route_table.private: Creating...
+module.route_table.aws_route_table.private: Creation complete after 1s [id=rtb-0c3d3b88e993f8243]
+module.route_table.aws_route_table_association.private: Creating...
+module.route_table.aws_route_table_association.private: Creation complete after 0s [id=rtbassoc-0575de4c8b3622299]
+
+Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+private_instance_id = "i-026e35d4de804ecae"
+private_instance_private_ip = "10.0.2.31"
+private_route_table_id = "rtb-0c3d3b88e993f8243"
+private_subnet_id = "subnet-04a19fea1bea0ad03"
+public_instance_id = "i-0b76496c749e86e35"
+public_instance_public_ip = "3.253.38.15"
+public_route_table_id = "rtb-09430c59706d2b38e"
+public_subnet_id = "subnet-0c967b1478c8df800"
+vpc_id = "vpc-0f7a67bf89ac8e585"
+```
 
 ## VERIFY RESOURCES
 Now that we have created our resources, it is time to verify if we truly created them just by running `terraform apply`
@@ -1107,9 +1170,10 @@ login to your AWS account to check your resources.
 
 ### VPC
 
+
 ### SUBNETS
 
-### INTERNET GATEWAYS
+### INTERNET GATEWAY
 
 ### ROUTE TABLES
 
@@ -1123,5 +1187,534 @@ login to your AWS account to check your resources.
 
 ## TFPLAN OUTPLAN
 ```bash
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
 
+Terraform will perform the following actions:
+
+  # module.instances.aws_instance.private_instance will be created
+  + resource "aws_instance" "private_instance" {
+      + ami                                  = "ami-0c38b837cd80f13bb"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "KCDBServer"
+        }
+      + tags_all                             = {
+          + "Name" = "KCDBServer"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = "ae035e4c870b77a834e3cb717f7813851df0ff50"
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+  # module.instances.aws_instance.public_instance will be created
+  + resource "aws_instance" "public_instance" {
+      + ami                                  = "ami-0c38b837cd80f13bb"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = true
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      + iam_instance_profile                 = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t2.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = "webserver-pem-key-pair"
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + spot_instance_request_id             = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "KCWebServer"
+        }
+      + tags_all                             = {
+          + "Name" = "KCWebServer"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = "661568f30463228651734a7acf6e051a7ce056d7"
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+    }
+
+  # module.internet_gateway.aws_internet_gateway.main will be created
+  + resource "aws_internet_gateway" "main" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Name" = "KC-IGW"
+        }
+      + tags_all = {
+          + "Name" = "KC-IGW"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # module.nacls.aws_network_acl.private will be created
+  + resource "aws_network_acl" "private" {
+      + arn        = (known after apply)
+      + egress     = [
+          + {
+              + action          = "allow"
+              + cidr_block      = "0.0.0.0/0"
+              + from_port       = 80
+              + protocol        = "tcp"
+              + rule_no         = 100
+              + to_port         = 80
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + action          = "allow"
+              + cidr_block      = "10.0.1.0/24"
+              + from_port       = 0
+              + protocol        = "-1"
+              + rule_no         = 110
+              + to_port         = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id         = (known after apply)
+      + ingress    = [
+          + {
+              + action          = "allow"
+              + cidr_block      = "10.0.1.0/24"
+              + from_port       = 0
+              + protocol        = "tcp"
+              + rule_no         = 100
+              + to_port         = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + owner_id   = (known after apply)
+      + subnet_ids = (known after apply)
+      + tags       = {
+          + "Name" = "KCPrivateNACL"
+        }
+      + tags_all   = {
+          + "Name" = "KCPrivateNACL"
+        }
+      + vpc_id     = (known after apply)
+    }
+
+  # module.nacls.aws_network_acl.public will be created
+  + resource "aws_network_acl" "public" {
+      + arn        = (known after apply)
+      + egress     = [
+          + {
+              + action          = "allow"
+              + cidr_block      = "0.0.0.0/0"
+              + from_port       = 0
+              + protocol        = "-1"
+              + rule_no         = 100
+              + to_port         = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id         = (known after apply)
+      + ingress    = [
+          + {
+              + action          = "allow"
+              + cidr_block      = "0.0.0.0/0"
+              + from_port       = 443
+              + protocol        = "tcp"
+              + rule_no         = 110
+              + to_port         = 443
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + action          = "allow"
+              + cidr_block      = "0.0.0.0/0"
+              + from_port       = 80
+              + protocol        = "tcp"
+              + rule_no         = 100
+              + to_port         = 80
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + action          = "allow"
+              + cidr_block      = "154.161.131.148/32"
+              + from_port       = 22
+              + protocol        = "tcp"
+              + rule_no         = 120
+              + to_port         = 22
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + owner_id   = (known after apply)
+      + subnet_ids = (known after apply)
+      + tags       = {
+          + "Name" = "KCPublicNACL"
+        }
+      + tags_all   = {
+          + "Name" = "KCPublicNACL"
+        }
+      + vpc_id     = (known after apply)
+    }
+
+  # module.nat_gateway.aws_eip.nat will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + arn                  = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + ptr_record           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags_all             = (known after apply)
+      + vpc                  = (known after apply)
+    }
+
+  # module.nat_gateway.aws_nat_gateway.main will be created
+  + resource "aws_nat_gateway" "main" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name" = "KC-NAT-Gateway"
+        }
+      + tags_all                           = {
+          + "Name" = "KC-NAT-Gateway"
+        }
+    }
+
+  # module.route_table.aws_route_table.private will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + nat_gateway_id             = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "PrivateRouteTable"
+        }
+      + tags_all         = {
+          + "Name" = "PrivateRouteTable"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.route_table.aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+                # (11 unchanged attributes hidden)
+            },
+        ]
+      + tags             = {
+          + "Name" = "PublicRouteTable"
+        }
+      + tags_all         = {
+          + "Name" = "PublicRouteTable"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.route_table.aws_route_table_association.private will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.route_table.aws_route_table_association.public will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.security_groups.aws_security_group.private will be created
+  + resource "aws_security_group" "private" {
+      + arn                    = (known after apply)
+      + description            = "Security group for private instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + from_port        = 5432
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 5432
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "PrivateSG"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "PrivateSecurityGroup"
+        }
+      + tags_all               = {
+          + "Name" = "PrivateSecurityGroup"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.security_groups.aws_security_group.public will be created
+  + resource "aws_security_group" "public" {
+      + arn                    = (known after apply)
+      + description            = "Security group for public instances"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+                # (1 unchanged attribute hidden)
+            },
+          + {
+              + cidr_blocks      = [
+                  + "154.161.131.148/32",
+                ]
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = "PublicSG"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "PublicSecurityGroup"
+        }
+      + tags_all               = {
+          + "Name" = "PublicSecurityGroup"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.subnet.aws_subnet.private will be created
+  + resource "aws_subnet" "private" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-1c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "PrivateSubnet"
+        }
+      + tags_all                                       = {
+          + "Name" = "PrivateSubnet"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.subnet.aws_subnet.public will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-1c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name" = "PublicSubnet"
+        }
+      + tags_all                                       = {
+          + "Name" = "PublicSubnet"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.vpc.aws_vpc.vpc will be created
+  + resource "aws_vpc" "vpc" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.0.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = (known after apply)
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags                                 = {
+          + "Name" = "KCVPC"
+        }
+      + tags_all                             = {
+          + "Name" = "KCVPC"
+        }
+    }
+
+Plan: 16 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + private_instance_id         = (known after apply)
+  + private_instance_private_ip = (known after apply)
+  + private_route_table_id      = (known after apply)
+  + private_subnet_id           = (known after apply)
+  + public_instance_id          = (known after apply)
+  + public_instance_public_ip   = (known after apply)
+  + public_route_table_id       = (known after apply)
+  + public_subnet_id            = (known after apply)
+  + vpc_id                      = (known after apply)
 ```
