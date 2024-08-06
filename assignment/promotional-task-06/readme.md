@@ -36,8 +36,7 @@ After acquiring and installing the necessary tools, you need to configure your A
   ```
 - Replace `<aws-profile-name>` with your AWS username, e.g., `kc-dave`.
 - At the prompts, copy and paste your keys. Set your region to `eu-west-1` and output format to `json`.
-
-<!-- By following these steps, you'll have your AWS profile configured and ready for Terraform to use in creating and managing your resources. -->
+![tf-aws-configure](https://github.com/user-attachments/assets/8382c926-9f58-4b4d-be56-6ade86647e1a)
 
 ## WRITE TERRAFORM CODE
 
@@ -1169,21 +1168,78 @@ Now that we have created our resources, it is time to verify if we truly created
 login to your AWS account to check your resources.
 
 ### VPC
-
+![tf-vpc-created](https://github.com/user-attachments/assets/79aef202-0b14-4680-ac7f-b3664f07f799)
 
 ### SUBNETS
+**Public Subnet**
+![tf-pb-subnet-created](https://github.com/user-attachments/assets/c88b8d64-e117-4e66-a79d-1b5c87ed83d2)
+
+**Private Subnet**
+![tf-pv-sub-created](https://github.com/user-attachments/assets/b5b62873-2614-4717-9f63-82704dc4cf78)
 
 ### INTERNET GATEWAY
+![tf-igw-created](https://github.com/user-attachments/assets/467c2063-5393-40c1-a912-320fd2ecbfec)
 
 ### ROUTE TABLES
+**Public Route Table**
+![tf-pb-rtb-created](https://github.com/user-attachments/assets/092ce4bd-4c4c-4a41-af0c-7cbd567862c5)
+
+**Public Route Table Routes**
+![tf-pb-rtb-routes](https://github.com/user-attachments/assets/f574c27e-9294-421c-a5c9-9788c533b96e)
+
+**Private Route Table**
+![tf-pv-rtb-created](https://github.com/user-attachments/assets/645f49c8-ee91-4da4-8cbd-5bc4ff2b9930)
+
+**Private Route Table Routs**
+![tf-pv-rtb-routes](https://github.com/user-attachments/assets/79acdb9a-8733-418b-b3da-9ae6477465f0)
 
 ### NAT GATEWAY
+![tf-natgw-created](https://github.com/user-attachments/assets/77132797-081c-45d1-b4ae-9138421a078d)
 
 ### SECURITY GROUPS
+**Public Security Group**
+![tf-pb-sec-grp-created](https://github.com/user-attachments/assets/2ed9e46c-727d-4cc6-a95e-16276b2b673a)
+
+**Public Security Group Inbound Rule**
+![tf-pb-sec-grp-in-rule](https://github.com/user-attachments/assets/711f7196-e94f-4dc7-9047-401063214fab)
+
+**Public Security Group Outbound Rule**
+![tf-pb-sec-grp-out-rule](https://github.com/user-attachments/assets/a5524b71-b5df-420e-bb12-78ec4dc908c3)
+
+**Private Security Group**
+![tf-pv-sec-grp-created](https://github.com/user-attachments/assets/f523cc85-5a1e-4b52-b69c-81451132542c)
+
+**Private Security Group Inbound Rule**
+![tf-pv-sec-grp-in-rule](https://github.com/user-attachments/assets/5650b7b7-4d3d-4c30-abc4-ab5973262414)
+
+**Private Security Group Outbound Rule**
+![tf-pv-sec-grp-out-rule](https://github.com/user-attachments/assets/e1710757-b105-45c1-8cc9-9d275aac01d4)
 
 ### NETWORK ACCESS CONTROL LISTS (NACLs)
+**Public NACL
+![tf-pb-nacl-created](https://github.com/user-attachments/assets/d856e473-95ba-43ad-a492-e735bbd0ffba)
+
+**Public NACL Inbound Rule**
+![tf-pb-nacl-in-rule](https://github.com/user-attachments/assets/f31a96c4-b081-4b5a-b5cc-bd8e5ab2091f)
+
+**Public NACL Outbound Rule**
+![tf-pb-nacl-out-rule](https://github.com/user-attachments/assets/a8dfb327-a485-4fe0-8352-08f8f81a9a49)
+
+**Private NACL**
+![tf-pv-nacl-created](https://github.com/user-attachments/assets/0f5a8bae-fa72-40ea-8285-f008cacfabc6)
+
+**Private NACL Inbound Rule**
+![tf-pv-nacl-in-rule](https://github.com/user-attachments/assets/987b1d64-b69e-4a33-b17b-e282f4184302)
+
+**Private NACL Outbound Rule**
+![tf-pv-nacl-out-rule](https://github.com/user-attachments/assets/a9e35a9b-d4f9-41a1-8e27-d79fb9628b35)
 
 ### INSTANCES
+**Public Instance (Web Server)**
+![tf-pb-instance-created](https://github.com/user-attachments/assets/bf3e8e28-2d2d-42e8-a062-1994c98571bd)
+
+**Private Instance (Database Server)**
+![tf-pv-instance-created](https://github.com/user-attachments/assets/6bc0b470-0743-4ea0-8f26-0876180f5b15)
 
 ## TFPLAN OUTPLAN
 ```bash
