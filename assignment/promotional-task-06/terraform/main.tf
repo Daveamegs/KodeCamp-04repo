@@ -47,7 +47,7 @@ module "security_groups" {
   source              = "./modules/security_groups"
   internet_cidr_block = module.route_table.internet_cidr_block
   vpc_id              = module.vpc.vpc_id
-  ssh_access_ip       = var.ssh_access_ip
+  local_ip            = var.local_ip
 }
 
 module "nacls" {
@@ -55,7 +55,7 @@ module "nacls" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_id  = module.subnet.public_subnet_id
   private_subnet_id = module.subnet.private_subnet_id
-  ssh_access_ip     = var.ssh_access_ip
+  local_ip          = var.local_ip
 }
 
 module "instances" {

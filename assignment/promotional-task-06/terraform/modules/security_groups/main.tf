@@ -21,7 +21,7 @@ resource "aws_security_group" "public" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.ssh_access_ip]
+    cidr_blocks = [var.local_ip]
   }
 
   egress {
@@ -42,9 +42,9 @@ resource "aws_security_group" "private" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
     security_groups = [aws_security_group.public.id]
   }
 

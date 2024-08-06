@@ -10,7 +10,7 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "ssh_access_ip" {
+variable "local_ip" {
   description = "IP address to allow SSH access from"
   type        = string
   default     = "154.161.131.148/32"

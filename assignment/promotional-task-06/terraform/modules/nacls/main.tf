@@ -35,7 +35,7 @@ resource "aws_network_acl" "public" {
     protocol   = "tcp"
     rule_no    = 120
     action     = "allow"
-    cidr_block = var.ssh_access_ip
+    cidr_block = var.local_ip
   }
 
   tags = {
