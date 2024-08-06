@@ -1100,6 +1100,7 @@ After that, run
 ```bash
 terraform apply
 ```
+Enter `yes` to confirm.
 This will create all the resources you stated with code. See the output below.
 ```bash
 david@ommema:~/Documents/DevOps/kodecamp/kodecamp4/github-clone/KodeCamp-04repo/assignment/promotional-task-06/terraform$ terraform apply "tfplan.json"
@@ -1775,4 +1776,66 @@ Changes to Outputs:
   + public_route_table_id       = (known after apply)
   + public_subnet_id            = (known after apply)
   + vpc_id                      = (known after apply)
+```
+## DESTROY RESOURCES
+After checking and reviewing everything, destroy the resources created by running
+```bash
+terraform destroy
+```
+Enter `yes` at the prompt to confirm.
+
+Output after everything is destroyed.
+```bash
+module.route_table.aws_route_table_association.private: Destroying... [id=rtbassoc-0575de4c8b3622299]
+module.route_table.aws_route_table_association.public: Destroying... [id=rtbassoc-0db080fe74d3af6f0]
+module.nacls.aws_network_acl.private: Destroying... [id=acl-09402e01f1f17c5f6]
+module.nacls.aws_network_acl.public: Destroying... [id=acl-0154faca27bcf4bb9]
+module.instances.aws_instance.public_instance: Destroying... [id=i-0b76496c749e86e35]
+module.instances.aws_instance.private_instance: Destroying... [id=i-026e35d4de804ecae]
+module.route_table.aws_route_table_association.private: Destruction complete after 1s
+module.route_table.aws_route_table_association.public: Destruction complete after 1s
+module.route_table.aws_route_table.private: Destroying... [id=rtb-0c3d3b88e993f8243]
+module.route_table.aws_route_table.public: Destroying... [id=rtb-09430c59706d2b38e]
+module.nacls.aws_network_acl.private: Destruction complete after 2s
+module.nacls.aws_network_acl.public: Destruction complete after 2s
+module.route_table.aws_route_table.private: Destruction complete after 1s
+module.route_table.aws_route_table.public: Destruction complete after 1s
+module.internet_gateway.aws_internet_gateway.main: Destroying... [id=igw-0f3bc332f1fbf4d0a]
+module.nat_gateway.aws_nat_gateway.main: Destroying... [id=nat-0d279a6643a6dab62]
+module.instances.aws_instance.private_instance: Still destroying... [id=i-026e35d4de804ecae, 10s elapsed]
+module.instances.aws_instance.public_instance: Still destroying... [id=i-0b76496c749e86e35, 10s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still destroying... [id=nat-0d279a6643a6dab62, 10s elapsed]
+module.internet_gateway.aws_internet_gateway.main: Still destroying... [id=igw-0f3bc332f1fbf4d0a, 10s elapsed]
+module.instances.aws_instance.public_instance: Still destroying... [id=i-0b76496c749e86e35, 20s elapsed]
+module.instances.aws_instance.private_instance: Still destroying... [id=i-026e35d4de804ecae, 20s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still destroying... [id=nat-0d279a6643a6dab62, 20s elapsed]
+module.internet_gateway.aws_internet_gateway.main: Still destroying... [id=igw-0f3bc332f1fbf4d0a, 20s elapsed]
+module.instances.aws_instance.private_instance: Still destroying... [id=i-026e35d4de804ecae, 30s elapsed]
+module.instances.aws_instance.public_instance: Still destroying... [id=i-0b76496c749e86e35, 30s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Still destroying... [id=nat-0d279a6643a6dab62, 30s elapsed]
+module.internet_gateway.aws_internet_gateway.main: Still destroying... [id=igw-0f3bc332f1fbf4d0a, 30s elapsed]
+module.instances.aws_instance.public_instance: Still destroying... [id=i-0b76496c749e86e35, 40s elapsed]
+module.instances.aws_instance.private_instance: Still destroying... [id=i-026e35d4de804ecae, 40s elapsed]
+module.instances.aws_instance.public_instance: Destruction complete after 42s
+module.nat_gateway.aws_nat_gateway.main: Still destroying... [id=nat-0d279a6643a6dab62, 40s elapsed]
+module.internet_gateway.aws_internet_gateway.main: Still destroying... [id=igw-0f3bc332f1fbf4d0a, 40s elapsed]
+module.instances.aws_instance.private_instance: Destruction complete after 43s
+module.security_groups.aws_security_group.private: Destroying... [id=sg-02bcdb45367b3d171]
+module.subnet.aws_subnet.private: Destroying... [id=subnet-04a19fea1bea0ad03]
+module.subnet.aws_subnet.private: Destruction complete after 1s
+module.security_groups.aws_security_group.private: Destruction complete after 2s
+module.security_groups.aws_security_group.public: Destroying... [id=sg-09d69fbc2e92dffda]
+module.security_groups.aws_security_group.public: Destruction complete after 1s
+module.internet_gateway.aws_internet_gateway.main: Destruction complete after 49s
+module.nat_gateway.aws_nat_gateway.main: Still destroying... [id=nat-0d279a6643a6dab62, 50s elapsed]
+module.nat_gateway.aws_nat_gateway.main: Destruction complete after 51s
+module.subnet.aws_subnet.public: Destroying... [id=subnet-0c967b1478c8df800]
+module.nat_gateway.aws_eip.nat: Destroying... [id=eipalloc-08655cdc24deb6db3]
+module.subnet.aws_subnet.public: Destruction complete after 1s
+module.vpc.aws_vpc.vpc: Destroying... [id=vpc-0f7a67bf89ac8e585]
+module.nat_gateway.aws_eip.nat: Destruction complete after 2s
+module.vpc.aws_vpc.vpc: Destruction complete after 1s
+
+Destroy complete! Resources: 16 destroyed.
+
 ```
