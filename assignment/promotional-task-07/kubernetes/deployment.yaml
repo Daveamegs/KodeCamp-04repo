@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kc-minikube-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kc-kube-app
+  template:
+    metadata:
+      labels:
+        app: kc-kube-app
+    spec:
+      containers:
+      - name: kc-minikube-app-deployment
+        image: daveamegs/kc-kube-app
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
