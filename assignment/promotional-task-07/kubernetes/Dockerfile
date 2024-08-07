@@ -1,4 +1,4 @@
-# Python Image
+# Python Docker Image
 FROM python:3
 
 # Set the working directory
@@ -14,4 +14,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]

@@ -4,8 +4,6 @@ from flask import Flask
 app = Flask(__name__)
 
 # Route Traffic to Index
-
-
 @app.route("/")
 def index():
     return "Hello, Welcome to KodeCamp DevOps Bookcamp! New"
