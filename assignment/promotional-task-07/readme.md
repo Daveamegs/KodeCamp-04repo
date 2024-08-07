@@ -2,7 +2,7 @@
 I created this directory structure to create, containerize and deploy a simple app to Kubernetes cluster using Minikube.
 
 Directory Structure
-.
+```bash
 ├── kubernetes
 │ ├── app.py
 │ ├── deployment.yaml
@@ -10,6 +10,7 @@ Directory Structure
 │ ├── requirements.txt
 │ └── service.yaml
 └── readme.md
+```
 
 ## STEP 1 - CREATE APPLICATION
 
@@ -86,6 +87,8 @@ And then ran it locally
 # Run Docker Container
 docker run -p 8000:8000 kc-kube-app
 ```
+Response
+![doc-kub-app-running](https://github.com/user-attachments/assets/44621298-790d-4623-a2c5-942a652bf8f7)
 
 ## STEP 3 - PUSH APP IMAGE TO DOCKER HUB
 
@@ -187,12 +190,17 @@ To now test if the app is really deployed to minikube cluster, I port-forwarded 
 kubectl port-forward service/kc-minikube-app-service 8080:80
 
 ```
-
 Response
+![doc-kube-port-forwarded](https://github.com/user-attachments/assets/c6e38654-47f3-4e73-9e70-3afc58135b7f)
 
+Connection is being handled correctly
+![doc-kube-handle-connection](https://github.com/user-attachments/assets/8a28f7a3-87c0-48f8-b51a-6cb88a920b1f)
+
+Live Website 
+![doc-kube-web-working](https://github.com/user-attachments/assets/f88c6acf-fa2d-4abd-a271-9e6c5f0f594c)
 
 ## ISSUES I FACED
 In my case, everything was straightforward. The only issue was I could not port-forward the kubernetes service. I was getting errors. I later realized it was because I installed `kubectl` after starting `minikube`. Everything worked well after restarting my laptop.
 
-Docker Image
+## Docker Image
 [docker image](https://hub.docker.com/r/daveamegs/kc-kube-app)
