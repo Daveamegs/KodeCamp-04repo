@@ -26,7 +26,7 @@ app = Flask(__name__)
 # Route Traffic to Index
 @app.route("/")
 def index():
-    return "Hello, Welcome to KodeCamp DevOps Bookcamp! New"
+    return "Hello, Welcome to KodeCamp DevOps Bootcamp!"
 
 # Run App
 if __name__ == "__main__":
